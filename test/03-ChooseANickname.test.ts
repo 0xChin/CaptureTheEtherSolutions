@@ -1,6 +1,7 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
 import { Contract } from 'ethers';
+import { formatBytes32String } from 'ethers/lib/utils';
 import { ethers } from 'hardhat';
 
 describe('DeployAContract', () => {
@@ -26,9 +27,7 @@ describe('DeployAContract', () => {
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    await captureTheEther.setNickname(formatBytes32String('Chiin'));
 
     expect(await target.isComplete()).to.equal(true);
   });

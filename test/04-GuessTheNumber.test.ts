@@ -1,6 +1,6 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
-import { Contract } from 'ethers';
+import { Contract, errors } from 'ethers';
 import { ethers } from 'hardhat';
 const { utils, provider } = ethers;
 
@@ -24,9 +24,7 @@ describe('GuessTheNumberChallenge', () => {
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    await target.guess(42, { value: ethers.utils.parseEther('1') });
 
     expect(await provider.getBalance(target.address)).to.equal(0);
   });
