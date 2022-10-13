@@ -1,6 +1,6 @@
 # Capture the Ether with Hardhat
 
-Challenges from [Capture the ether](https://capturetheether.com/) on hardhat.
+Challenges from [Capture the ether](https://capturetheether.com/) on hardhat. Template created by [Nicolás Bevilacqua](https://github.com/nicobevilacqua/CaptureTheEtherHardhat)
 ## How to use:
 
 1. Clone this repo.
