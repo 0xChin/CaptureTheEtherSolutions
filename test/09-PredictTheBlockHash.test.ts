@@ -29,7 +29,6 @@ describe('PredictTheBlockHashChallenge', () => {
     });
 
     for (let i = 0; i < 257; i++) {
-      console.log('Rock', i);
       await network.provider.send('evm_increaseTime', [1]);
       await network.provider.send('evm_mine');
     }
