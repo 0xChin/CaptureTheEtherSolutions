@@ -5,6 +5,7 @@ import { formatBytes32String } from 'ethers/lib/utils';
 import { ethers } from 'hardhat';
 
 describe('DeployAContract', () => {
+  let deployer: SignerWithAddress;
   let attacker: SignerWithAddress;
   let captureTheEther: Contract;
   let target: Contract;
