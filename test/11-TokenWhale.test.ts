@@ -16,8 +16,6 @@ describe('TokenWhaleChallenge', () => {
     ).deploy(attacker.address);
 
     await target.deployed();
-
-    target;
   });
 
   it('exploit', async () => {
