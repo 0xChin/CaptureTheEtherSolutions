@@ -1,8 +1,7 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
 import { Contract } from 'ethers';
-import { formatBytes32String, hexlify } from 'ethers/lib/utils';
-import { ethers, network } from 'hardhat';
+import { ethers } from 'hardhat';
 const { utils, provider } = ethers;
 
 describe('GuessTheRandomNumberChallenge', () => {

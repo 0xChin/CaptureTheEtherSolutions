@@ -1,7 +1,6 @@
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers';
 import { expect } from 'chai';
 import { Contract } from 'ethers';
-import { BytesLike, formatBytes32String, keccak256, parseBytes32String } from 'ethers/lib/utils';
 import { ethers } from 'hardhat';
 const { utils } = ethers;
 
