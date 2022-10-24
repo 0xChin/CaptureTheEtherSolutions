@@ -19,9 +19,8 @@ describe('AssumeOwnershipChallenge', () => {
   });
 
   it('exploit', async () => {
-    /**
-     * YOUR CODE HERE
-     * */
+    await target.AssumeOwmershipChallenge()
+    await target.authenticate()
 
     expect(await target.isComplete()).to.equal(true);
   });

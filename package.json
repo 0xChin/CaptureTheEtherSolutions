@@ -24,8 +24,8 @@
     "fifty-years": "npx hardhat test ./test/15-FiftyYears.test.ts",
     "fuzzy-identity": "npx hardhat test ./test/16-FuzzyIdentity.test.ts",
     "public-key": "npx hardhat test ./test/17-PublicKey.test.ts",
-    "assume-ownership": "npx hardhat test ./test/18-AssumeOwnership.test.ts",
-    "token-bank": "npx hardhat test ./test/19-TokenBank.test.ts"
+    "assume-ownership": "npx hardhat test ./test/19-AssumeOwnership.test.ts",
+    "token-bank": "npx hardhat test ./test/20-TokenBank.test.ts"
   },
   "dependencies": {
     "@ethersproject/abi": "^5.7.0",
@@ -38,6 +38,7 @@
     "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@typechain/ethers-v5": "^10.1.0",
     "@typechain/hardhat": "^6.1.2",
+    "ethereumjs-tx": "^2.1.2",
     "hardhat": "^2.6.4",
     "hardhat-watcher": "^2.1.1",
     "solc": "^0.8.17",

