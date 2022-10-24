@@ -19,7 +19,7 @@ contract FuzzyIdentityChallenge {
     }
 
     function isBadCode(address _addr) internal pure returns (bool) {
-        bytes20 addr = bytes20(_addr);
+        bytes20 addr = bytes20(hex"000000000000000000000000000000000badc0de");
         bytes20 id = hex"000000000000000000000000000000000badc0de";
         bytes20 mask = hex"000000000000000000000000000000000fffffff";
 
@@ -32,5 +32,15 @@ contract FuzzyIdentityChallenge {
         }
 
         return false;
+    }
+}
+
+contract FuzzyIdentityChallengeAttacker {
+    function complete(address addr) external {
+        FuzzyIdentityChallenge(addr).authenticate();
+    }
+
+    function name() external view returns (bytes32) {
+        return bytes32("smarx");
     }
 }

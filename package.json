@@ -22,7 +22,7 @@
     "mapping": "npx hardhat test ./test/13-Mapping.test.ts",
     "donation": "npx hardhat test ./test/14-Donation.test.ts",
     "fifty-years": "npx hardhat test ./test/15-FiftyYears.test.ts",
-    "fuzzy-identity": "npx hardhat test ./test/16-fuzzy-identity.test.ts",
+    "fuzzy-identity": "npx hardhat test ./test/16-FuzzyIdentity.test.ts",
     "public-key": "npx hardhat test ./test/17-PublicKey.test.ts",
     "assume-ownership": "npx hardhat test ./test/18-AssumeOwnership.test.ts",
     "token-bank": "npx hardhat test ./test/19-TokenBank.test.ts"
